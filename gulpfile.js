@@ -15,9 +15,12 @@ elixir(function(mix) {
     mix.sass('app.scss');
     mix.styles([
         '../bower/vis/dist/vis.min.css',
+        '../clique-ui/css/clique.min.css',
     ], 'public/css/vendor.css');
     mix.scripts([
         '../bower/vis/dist/vis.min.js',
+        '../bower/jquery/dist/jquery.min.js',
+        '../clique-ui/js/clique.min.js',
     ], 'public/js/vendor.js');
     mix.copy('resources/assets/bower/vis/dist/img', 'public/css/img');
 });
