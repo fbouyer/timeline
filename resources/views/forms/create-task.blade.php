@@ -4,28 +4,28 @@
         <label class="form-label" for="name">Name</label>
 
         <div class="form-controls">
-            <input type="text" class="form-control" id="name" placeholder="Name">
+            <input type="text" class="form-control" id="name" name="name" placeholder="Name">
         </div>
     </div>
     <div class="form-row">
-        <label class="form-label" for="start-date">Start Date</label>
+        <label class="form-label" for="date_start">Start Date</label>
 
         <div class="form-controls">
-            <input type="date" class="form-control" id="start-date">
+            <input type="date" class="form-control" id="date_start" name="date_start">
         </div>
     </div>
     <div class="form-row">
-        <label class="form-label" for="end-date">End Date</label>
+        <label class="form-label" for="date_end">End Date</label>
 
         <div class="form-controls">
-            <input type="date" class="form-control" id="end-date">
+            <input type="date" class="form-control" id="date_end" name="date_end">
         </div>
     </div>
     <div class="form-row">
         <label class="form-label" for="group">Group</label>
 
         <div class="form-controls">
-            <select name="group">
+            <select name="group_id">
                 <?php
                 $groups = \App\Group::all();
                 ?>

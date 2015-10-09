@@ -40,7 +40,6 @@ class GroupController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|max:255',
-            'user_id' => 'required',
         ]);
 
         if ($validator->fails()){
@@ -49,7 +48,9 @@ class GroupController extends Controller
         else {
             $group = new Group($request->all());
             $group->color = dechex(rand());
-            Auth::user()->groups()->save($group);
+            \Auth::user()->groups()->save($group);
+
+            return redirect(url('app'))->with('msg', 'Group created with success.');
         }
     }
 

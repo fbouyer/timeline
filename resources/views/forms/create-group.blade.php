@@ -3,7 +3,7 @@
 
     <div class="form-group">
         <label for="name">Name</label>
-        <input type="text" class="form-control" id="name" placeholder="Name">
+        <input type="text" class="form-control" id="name" name="name" placeholder="Name">
     </div>
 
     <input type="hidden" name="user_id"  />

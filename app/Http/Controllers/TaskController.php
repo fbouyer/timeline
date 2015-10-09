@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Group;
+use App\Task;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -36,7 +38,25 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validator = \Validator::make($request->all(), [
+            'name' => 'required|max:255',
+        ]);
+
+        if ($validator->fails()){
+
+        }
+        else {
+            $group = Group::find($request->get('group_id'));
+
+            if ($group){
+                $task = new Task($request->all());
+                $task->save();
+                return redirect(url('app'))->with('msg', 'Task created with success.');
+            }
+            else{
+                return redirect(url('app'))->with('error', 'Error while creating Task.');
+            }
+        }
     }
 
     /**

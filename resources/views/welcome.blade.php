@@ -45,7 +45,7 @@
         </div>
         <div id="visualization"></div>
 
-
+        @include('alerts')
         @include('forms/create-task')
         @include('forms/create-group')
 
@@ -55,20 +55,19 @@
 
             // Create a DataSet (allows two way data-binding)
             var groups = new vis.DataSet([
-                {id: 0, content: 'First', value: 1},
-                {id: 1, content: 'Third', value: 3},
-                {id: 2, content: 'Second', value: 2}
+                @foreach($groups as $group)
+                    {id: {{ $group->id }}, content: '{{ $group->name }}', value: {{ $group->id }} },
+                @endforeach()
             ]);
+
+            console.log(groups);
 
             // create a dataset with items
             // note that months are zero-based in the JavaScript Date object, so month 3 is April
             var items = new vis.DataSet([
-                {id: 0, group: 0, content: 'item 0', start: new Date(2015, 3, 17), end: new Date(2015, 9, 21)},
-                {id: 1, group: 0, content: 'item 1', start: new Date(2015, 3, 19), end: new Date(2015, 9, 20)},
-                {id: 2, group: 1, content: 'item 2', start: new Date(2015, 3, 16), end: new Date(2015, 9, 24)},
-                {id: 3, group: 1, content: 'item 3', start: new Date(2015, 3, 23), end: new Date(2015, 9, 24)},
-                {id: 4, group: 1, content: 'item 4', start: new Date(2015, 3, 22), end: new Date(2015, 9, 26)},
-                {id: 5, group: 2, content: 'item 5', start: new Date(2015, 3, 24), end: new Date(2015, 9, 27)}
+                @foreach($tasks as $task)
+                    {id: {{ $task->id }}, group: {{ $task->group_id }}, content: '{{ $task->name }}', start: new Date('{{ $task->date_start }}'), end: new Date('{{ $task->date_end }}')},
+                @endforeach()
             ]);
 
             // Configuration for the Timeline
