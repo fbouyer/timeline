@@ -40,10 +40,14 @@ class TaskController extends Controller
     {
         $validator = \Validator::make($request->all(), [
             'name' => 'required|max:255',
+            'date_start' => 'required|date',
+            'date_end' => 'required|date|after:date_start'
         ]);
 
         if ($validator->fails()){
-
+            return redirect(url('app'))
+                ->withErrors($validator)
+                ->withInput();
         }
         else {
             $group = Group::find($request->get('group_id'));
@@ -101,6 +105,14 @@ class TaskController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $task = Task::find($id);
+
+        if (isset($task) && $task){
+            $task->delete();
+            return json_encode(['msg' => 'Task deleted with success.']);
+        }
+        else{
+            return json_encode(['error' => 'Error while deleting Task.']);
+        }
     }
 }
